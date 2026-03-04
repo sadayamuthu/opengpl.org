@@ -62,3 +62,19 @@ describe('Home — Control Planes', () => {
     expect(screen.getByText('Audit Controls')).toBeInTheDocument()
   })
 })
+
+describe('Home — Compliance', () => {
+  it('renders compliance section heading', () => {
+    render(<Home />)
+    expect(screen.getByText(/Built for regulated environments/i)).toBeInTheDocument()
+  })
+
+  it('renders all five compliance badges', () => {
+    render(<Home />)
+    expect(screen.getByText('NIST AI RMF')).toBeInTheDocument()
+    expect(screen.getByText('FedRAMP')).toBeInTheDocument()
+    expect(screen.getByText('HIPAA')).toBeInTheDocument()
+    expect(screen.getByText('EU AI Act')).toBeInTheDocument()
+    expect(screen.getByText('SOC 2')).toBeInTheDocument()
+  })
+})

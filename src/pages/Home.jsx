@@ -91,6 +91,23 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Compliance Coverage */}
+      <section className="flex flex-col items-center gap-8">
+        <h2 className="text-2xl font-semibold text-text-primary text-center">
+          Built for regulated environments.
+        </h2>
+        <div className="flex flex-wrap justify-center gap-3">
+          {['NIST AI RMF', 'FedRAMP', 'HIPAA', 'EU AI Act', 'SOC 2'].map((badge) => (
+            <span
+              key={badge}
+              className="px-4 py-1.5 rounded-full border border-subtle text-text-muted text-xs tracking-widest uppercase"
+            >
+              {badge}
+            </span>
+          ))}
+        </div>
+      </section>
+
     </div>
   )
 }

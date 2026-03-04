@@ -33,3 +33,17 @@ describe('Home — Hero', () => {
     expect(screen.getByText(/restrict-pii-output/i)).toBeInTheDocument()
   })
 })
+
+describe('Home — Why OpenGPL', () => {
+  it('renders Why OpenGPL section heading', () => {
+    render(<Home />)
+    expect(screen.getByText(/Why OpenGPL/i)).toBeInTheDocument()
+  })
+
+  it('renders the three why cards', () => {
+    render(<Home />)
+    expect(screen.getByText(/Existing tools weren't built for this/i)).toBeInTheDocument()
+    expect(screen.getByText(/LLM-native primitives/i)).toBeInTheDocument()
+    expect(screen.getByText(/Compliance evidence at runtime/i)).toBeInTheDocument()
+  })
+})

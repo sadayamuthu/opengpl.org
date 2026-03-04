@@ -44,6 +44,32 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Why OpenGPL */}
+      <section id="spec" className="flex flex-col gap-8">
+        <h2 className="text-2xl font-semibold text-text-primary text-center">Why OpenGPL</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {[
+            {
+              title: "Existing tools weren't built for this",
+              body: "OPA/Rego and AWS Cedar were designed for deterministic systems. Generative AI outputs are probabilistic — not binary.",
+            },
+            {
+              title: "LLM-native primitives",
+              body: "Trust levels, hallucination thresholds, and tool access are first-class concepts in every OpenGPL policy.",
+            },
+            {
+              title: "Compliance evidence at runtime",
+              body: "OpenGPL auto-generates OSCAL artifacts. Not just policy enforcement — provable compliance at rest and in motion.",
+            },
+          ].map((card, i) => (
+            <div key={i} className="bg-surface border border-subtle rounded-xl p-6 flex flex-col gap-3">
+              <h3 className="text-text-primary font-semibold text-base">{card.title}</h3>
+              <p className="text-text-muted text-sm leading-relaxed">{card.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
     </div>
   )
 }

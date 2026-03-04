@@ -47,3 +47,18 @@ describe('Home — Why OpenGPL', () => {
     expect(screen.getByText(/Compliance evidence at runtime/i)).toBeInTheDocument()
   })
 })
+
+describe('Home — Control Planes', () => {
+  it('renders control planes section heading', () => {
+    render(<Home />)
+    expect(screen.getByText(/One policy file\. Four planes of control\./i)).toBeInTheDocument()
+  })
+
+  it('renders all four control plane cards', () => {
+    render(<Home />)
+    expect(screen.getByText('Input Controls')).toBeInTheDocument()
+    expect(screen.getByText('Model Controls')).toBeInTheDocument()
+    expect(screen.getByText('Output Controls')).toBeInTheDocument()
+    expect(screen.getByText('Audit Controls')).toBeInTheDocument()
+  })
+})

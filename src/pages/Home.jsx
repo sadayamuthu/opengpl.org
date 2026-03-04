@@ -70,6 +70,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Four Control Planes */}
+      <section className="flex flex-col gap-8">
+        <h2 className="text-2xl font-semibold text-text-primary text-center">
+          One policy file. Four planes of control.
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
+          {[
+            { icon: '🛡️', name: 'Input Controls', desc: 'Detect and sanitize harmful prompts before they reach the model.' },
+            { icon: '🤖', name: 'Model Controls', desc: 'Govern LLM behavior, trust levels, and tool access.' },
+            { icon: '📤', name: 'Output Controls', desc: 'Block sensitive data exposure and enforce attribution.' },
+            { icon: '📋', name: 'Audit Controls', desc: 'Generate OSCAL compliance artifacts at runtime and at rest.' },
+          ].map((plane, i) => (
+            <div key={i} className="bg-surface border border-subtle rounded-xl p-6 flex flex-col items-center text-center gap-3">
+              <span className="text-3xl">{plane.icon}</span>
+              <h3 className="text-text-primary font-semibold text-sm">{plane.name}</h3>
+              <p className="text-text-muted text-xs leading-relaxed">{plane.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
     </div>
   )
 }

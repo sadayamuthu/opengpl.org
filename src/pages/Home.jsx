@@ -108,6 +108,39 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Schema Quick-Start */}
+      <section id="schema" className="flex flex-col gap-8">
+        <h2 className="text-2xl font-semibold text-text-primary text-center">Use it today.</h2>
+        <div className="max-w-2xl mx-auto w-full bg-surface border border-subtle rounded-xl p-6 font-mono text-sm flex flex-col gap-2">
+          <p className="text-text-muted"># Add to VS Code (settings.json)</p>
+          <p className="text-accent-cyan mt-1">{'{'}</p>
+          <p className="text-accent-cyan pl-4">{'"yaml.schemas": {'}</p>
+          <p className="text-accent-cyan pl-8">
+            {'"https://opengpl.org/schema/v0.1/schema.json": "*.gpl"'}
+          </p>
+          <p className="text-accent-cyan pl-4">{'}'}</p>
+          <p className="text-accent-cyan">{'}'}</p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="https://opengpl.org/schema/v0.1/schema.json"
+            target="_blank"
+            rel="noreferrer"
+            className="px-6 py-3 rounded-lg bg-accent-blue text-space font-semibold text-sm hover:opacity-90 transition-opacity glow-blue text-center"
+          >
+            Download Schema
+          </a>
+          <a
+            href="https://github.com/sadayamuthu/opengpl"
+            target="_blank"
+            rel="noreferrer"
+            className="px-6 py-3 rounded-lg border border-subtle text-text-primary text-sm hover:border-accent-cyan transition-colors duration-200 text-center"
+          >
+            View on GitHub ↗
+          </a>
+        </div>
+      </section>
+
     </div>
   )
 }

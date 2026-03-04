@@ -4,7 +4,7 @@ import Home from './Home'
 describe('Home — Hero', () => {
   it('renders version badge', () => {
     render(<Home />)
-    expect(screen.getByText(/v0\.1/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/v0\.1/i).length).toBeGreaterThan(0)
   })
 
   it('renders hero headline', () => {
@@ -76,5 +76,23 @@ describe('Home — Compliance', () => {
     expect(screen.getByText('HIPAA')).toBeInTheDocument()
     expect(screen.getByText('EU AI Act')).toBeInTheDocument()
     expect(screen.getByText('SOC 2')).toBeInTheDocument()
+  })
+})
+
+describe('Home — Schema Quick-Start', () => {
+  it('renders schema section heading', () => {
+    render(<Home />)
+    expect(screen.getByText(/Use it today/i)).toBeInTheDocument()
+  })
+
+  it('renders VS Code settings snippet', () => {
+    render(<Home />)
+    expect(screen.getByText(/yaml\.schemas/i)).toBeInTheDocument()
+  })
+
+  it('renders Download Schema CTA', () => {
+    render(<Home />)
+    const links = screen.getAllByRole('link', { name: /download schema/i })
+    expect(links.length).toBeGreaterThan(0)
   })
 })

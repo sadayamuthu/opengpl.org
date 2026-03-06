@@ -19,6 +19,7 @@ export default function App() {
             <Route path="/schema" element={<Schema />} />
             <Route path="/sdk" element={<Sdk />} />
             <Route path="/sidecar" element={<Sidecar />} />
+            <Route path="*" element={<Home />} />
           </Routes>
         </main>
         <Footer />

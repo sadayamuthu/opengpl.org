@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Footer() {
   return (
     <footer className="border-t border-subtle bg-surface mt-auto">
@@ -7,23 +9,29 @@ export default function Footer() {
           <a
             href="https://openastra.org"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="hover:text-accent-cyan transition-colors duration-200"
           >
             OpenAstra
           </a>
         </p>
         <div className="flex items-center gap-6 text-sm">
-          <a href="#spec" className="text-text-muted hover:text-accent-cyan transition-colors duration-200">
+          <Link to="/spec" className="text-text-muted hover:text-accent-cyan transition-colors duration-200">
             Spec
-          </a>
-          <a href="#schema" className="text-text-muted hover:text-accent-cyan transition-colors duration-200">
+          </Link>
+          <Link to="/schema" className="text-text-muted hover:text-accent-cyan transition-colors duration-200">
             Schema
-          </a>
+          </Link>
+          <Link to="/sdk" className="text-text-muted hover:text-accent-cyan transition-colors duration-200">
+            SDK
+          </Link>
+          <Link to="/sidecar" className="text-text-muted hover:text-accent-cyan transition-colors duration-200">
+            Sidecar
+          </Link>
           <a
             href="https://github.com/sadayamuthu/opengpl"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="text-text-muted hover:text-accent-cyan transition-colors duration-200"
           >
             GitHub ↗

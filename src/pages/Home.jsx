@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Home() {
   return (
     <div className="max-w-5xl mx-auto px-6 py-24 flex flex-col gap-32">
@@ -15,22 +17,18 @@ export default function Home() {
           what they can access, produce, and how they prove compliance at runtime.
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
-          <a
-            href="https://github.com/sadayamuthu/opengpl"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to="/spec"
             className="px-6 py-3 rounded-lg bg-accent-blue text-space font-semibold text-sm hover:opacity-90 transition-opacity glow-blue"
           >
             Read the Spec
-          </a>
-          <a
-            href="https://opengpl.org/schema/v0.1/schema.json"
-            target="_blank"
-            rel="noreferrer"
+          </Link>
+          <Link
+            to="/schema"
             className="px-6 py-3 rounded-lg border border-subtle text-text-primary text-sm hover:border-accent-cyan transition-colors duration-200"
           >
             Get the Schema ↗
-          </a>
+          </Link>
         </div>
         <div className="w-full max-w-2xl bg-surface border border-subtle rounded-xl p-6 font-mono text-sm text-left flex flex-col gap-1">
           <p className="text-text-muted"># Example policy (policy.gpl)</p>
@@ -70,22 +68,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Four Control Planes */}
+      {/* Four Control Gates */}
       <section className="flex flex-col gap-8">
         <h2 className="text-2xl font-semibold text-text-primary text-center">
-          One policy file. Four planes of control.
+          One policy file. Four control gates.
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
           {[
-            { icon: '🛡️', name: 'Input Controls', desc: 'Detect and sanitize harmful prompts before they reach the model.' },
-            { icon: '🤖', name: 'Model Controls', desc: 'Govern LLM behavior, trust levels, and tool access.' },
-            { icon: '📤', name: 'Output Controls', desc: 'Block sensitive data exposure and enforce attribution.' },
-            { icon: '📋', name: 'Audit Controls', desc: 'Generate OSCAL compliance artifacts at runtime and at rest.' },
-          ].map((plane, i) => (
+            { icon: '🛡️', name: 'Input Gate', desc: 'Detect and sanitize harmful prompts before they reach the model.' },
+            { icon: '🤖', name: 'Model Gate', desc: 'Govern LLM behavior, trust levels, and tool access.' },
+            { icon: '📤', name: 'Output Gate', desc: 'Block sensitive data exposure and enforce attribution.' },
+            { icon: '📋', name: 'Audit Gate', desc: 'Generate OSCAL compliance artifacts at runtime and at rest.' },
+          ].map((gate, i) => (
             <div key={i} className="bg-surface border border-subtle rounded-xl p-6 flex flex-col items-center text-center gap-3">
-              <span className="text-3xl">{plane.icon}</span>
-              <h3 className="text-text-primary font-semibold text-sm">{plane.name}</h3>
-              <p className="text-text-muted text-xs leading-relaxed">{plane.desc}</p>
+              <span className="text-3xl">{gate.icon}</span>
+              <h3 className="text-text-primary font-semibold text-sm">{gate.name}</h3>
+              <p className="text-text-muted text-xs leading-relaxed">{gate.desc}</p>
             </div>
           ))}
         </div>
@@ -108,38 +106,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Schema Quick-Start */}
-      <section id="schema" className="flex flex-col gap-8">
-        <h2 className="text-2xl font-semibold text-text-primary text-center">Use it today.</h2>
-        <div className="max-w-2xl mx-auto w-full bg-surface border border-subtle rounded-xl p-6 font-mono text-sm flex flex-col gap-2">
-          <p className="text-text-muted"># Add to VS Code (settings.json)</p>
-          <p className="text-accent-cyan mt-1">{'{'}</p>
-          <p className="text-accent-cyan pl-4">{'"yaml.schemas": {'}</p>
-          <p className="text-accent-cyan pl-8">
-            {'"https://opengpl.org/schema/v0.1/schema.json": "*.gpl"'}
-          </p>
-          <p className="text-accent-cyan pl-4">{'}'}</p>
-          <p className="text-accent-cyan">{'}'}</p>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="https://opengpl.org/schema/v0.1/schema.json"
-            target="_blank"
-            rel="noreferrer"
-            className="px-6 py-3 rounded-lg bg-accent-blue text-space font-semibold text-sm hover:opacity-90 transition-opacity glow-blue text-center"
-          >
-            Download Schema
-          </a>
-          <a
-            href="https://github.com/sadayamuthu/opengpl"
-            target="_blank"
-            rel="noreferrer"
-            className="px-6 py-3 rounded-lg border border-subtle text-text-primary text-sm hover:border-accent-cyan transition-colors duration-200 text-center"
-          >
-            View on GitHub ↗
-          </a>
-        </div>
-      </section>
 
     </div>
   )

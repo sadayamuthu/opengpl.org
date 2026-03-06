@@ -59,8 +59,8 @@ export default function Home() {
               title: "Compliance evidence at runtime",
               body: "OpenGPL auto-generates OSCAL artifacts. Not just policy enforcement — provable compliance at rest and in motion.",
             },
-          ].map((card, i) => (
-            <div key={i} className="bg-surface border border-subtle rounded-xl p-6 flex flex-col gap-3">
+          ].map((card) => (
+            <div key={card.title} className="bg-surface border border-subtle rounded-xl p-6 flex flex-col gap-3">
               <h3 className="text-text-primary font-semibold text-base">{card.title}</h3>
               <p className="text-text-muted text-sm leading-relaxed">{card.body}</p>
             </div>
@@ -79,8 +79,8 @@ export default function Home() {
             { icon: '🤖', name: 'Model Gate', desc: 'Govern LLM behavior, trust levels, and tool access.' },
             { icon: '📤', name: 'Output Gate', desc: 'Block sensitive data exposure and enforce attribution.' },
             { icon: '📋', name: 'Audit Gate', desc: 'Generate OSCAL compliance artifacts at runtime and at rest.' },
-          ].map((gate, i) => (
-            <div key={i} className="bg-surface border border-subtle rounded-xl p-6 flex flex-col items-center text-center gap-3">
+          ].map((gate) => (
+            <div key={gate.name} className="bg-surface border border-subtle rounded-xl p-6 flex flex-col items-center text-center gap-3">
               <span className="text-3xl">{gate.icon}</span>
               <h3 className="text-text-primary font-semibold text-sm">{gate.name}</h3>
               <p className="text-text-muted text-xs leading-relaxed">{gate.desc}</p>

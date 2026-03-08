@@ -2,12 +2,12 @@ const gates = [
   {
     icon: '🛡️',
     name: 'Input Gate',
-    desc: 'Intercepts all prompts before they reach the model. Detects prompt injection, jailbreak attempts, and PII in user input. Supports semantic filters — not just keyword matching — so policies apply to intent, not just surface text.',
+    desc: 'Intercepts all prompts before they reach the model. Detects prompt injection, jailbreak attempts, and PII in user input. Supports semantic filters  not just keyword matching so policies apply to intent, not just surface text.',
   },
   {
     icon: '🤖',
     name: 'Model Gate',
-    desc: 'Controls which models an agent can invoke, at what trust level, and with which tools. Hallucination thresholds, max token limits, and tool-use permissions are first-class policy primitives — not config files.',
+    desc: 'Controls which models an agent can invoke, at what trust level, and with which tools. Hallucination thresholds, max token limits, and tool use permissions are first class policy primitives not config files.',
   },
   {
     icon: '📤',
@@ -17,7 +17,7 @@ const gates = [
   {
     icon: '📋',
     name: 'Audit Gate',
-    desc: 'Auto-generates OSCAL-compliant audit artifacts at runtime. Every policy decision is logged with agent identity, policy name, matched condition, and effect. Produces compliance evidence at rest and in motion.',
+    desc: 'Auto-generates OSCAL compliant audit artifacts at runtime. Every policy decision is logged with agent identity, policy name, matched condition, and effect. Produces compliance evidence at rest and in motion.',
   },
 ]
 
@@ -45,7 +45,7 @@ export default function Spec() {
       <section className="flex flex-col gap-6 max-w-3xl">
         <h1 className="text-4xl sm:text-5xl font-bold text-accent-cyan">The OpenGPL Specification</h1>
         <p className="text-text-muted text-lg leading-relaxed">
-          OpenGPL is an open, declarative policy language purpose-built for generative AI systems.
+          OpenGPL (Open Governance Policy Language) is an open, declarative policy language purpose-built for AI systems.
           It defines how AI agents behave, what resources they can access, what they can produce,
           and how they demonstrate compliance — in a single, auditable policy file.
         </p>

@@ -13,7 +13,7 @@ export default function Home() {
           The policy language for AI systems.
         </h1>
         <p className="text-text-muted text-lg max-w-xl leading-relaxed">
-          OpenGPL is an open, declarative standard for governing how AI agents behave —
+          OpenGPL (Open Governance Policy Language) is an open, declarative standard for governing how AI agents behave —
           what they can access, produce, and how they prove compliance at runtime.
         </p>
         <div className="flex flex-col sm:flex-row gap-4">

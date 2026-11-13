@@ -31,7 +31,7 @@ export function Button({ href, variant = 'outline', external = true, children, c
 
 export function CodeBlock({ title, children }) {
   return (
-    <div className="bg-ink text-[#EDE7DA] rounded-sm p-5 font-mono text-[13px] leading-relaxed overflow-x-auto">
+    <div className="bg-ink text-[#EDE7DA] rounded-sm p-5 font-mono text-[13px] leading-relaxed overflow-x-auto [font-variant-ligatures:none]">
       {title && <p className="text-[#EDE7DA]/50 mb-1">{title}</p>}
       <pre className="whitespace-pre">{children}</pre>
     </div>

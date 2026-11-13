@@ -1,28 +1,34 @@
+const LINKS = [
+  { href: '#why', label: 'Why' },
+  { href: '#planes', label: 'Planes' },
+  { href: '#schema', label: 'Schema' },
+  { href: '#ecosystem', label: 'Ecosystem' },
+  { href: '#cite', label: 'Cite' },
+]
+
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 bg-surface border-b border-subtle">
-      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 text-text-primary font-semibold text-lg">
-          <span className="text-accent-cyan">📜</span>
-          <span>OpenGPL</span>
-        </a>
-        <div className="flex items-center gap-8">
-          <a href="#spec" className="text-sm text-text-muted hover:text-text-primary transition-colors duration-200">
-            Spec
+    <header className="bg-paper/95 backdrop-blur sticky top-0 z-50">
+      <nav className="max-w-page mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-b-2 border-ink">
+        <div className="flex flex-wrap items-baseline gap-x-3">
+          <a href="#top" aria-label="OpenGPL" className="font-serif text-xl tracking-tight">
+            Open<span className="text-acc">GPL</span>
           </a>
-          <a href="#schema" className="text-sm text-text-muted hover:text-text-primary transition-colors duration-200">
-            Schema
+          <a href="https://openastra.org" target="_blank" rel="noreferrer" className="text-xs text-ink-muted hover:text-ink">
+            An OpenAstra framework ↗
           </a>
-          <a
-            href="https://github.com/sadayamuthu/opengpl"
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm text-text-muted hover:text-text-primary transition-colors duration-200"
-          >
+        </div>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
+          {LINKS.map((l) => (
+            <a key={l.href} href={l.href} className="text-sm text-ink-muted hover:text-ink transition-colors">
+              {l.label}
+            </a>
+          ))}
+          <a href="https://github.com/sadayamuthu/opengpl" target="_blank" rel="noreferrer" className="text-sm text-ink-muted hover:text-ink">
             GitHub ↗
           </a>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   )
 }

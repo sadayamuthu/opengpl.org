@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react'
 import Footer from './Footer'
 
 describe('Footer', () => {
-  it('renders copyright with OpenAstra attribution', () => {
+  it('names the family and category', () => {
     render(<Footer />)
-    expect(screen.getByText(/OpenAstra/i)).toBeInTheDocument()
+    expect(screen.getByText(/II\. Security Controls/)).toBeInTheDocument()
   })
 
   it('renders CC BY 4.0 license notice', () => {

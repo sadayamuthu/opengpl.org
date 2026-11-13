@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import Home from './Home'
 
 describe('Home — Hero', () => {
@@ -69,6 +69,11 @@ describe('Home — Compliance', () => {
     expect(screen.getByText(/Built for regulated environments/i)).toBeInTheDocument()
   })
 
+  it('renders ISO 42001 alongside the other badges', () => {
+    render(<Home />)
+    expect(screen.getByText('ISO 42001')).toBeInTheDocument()
+  })
+
   it('renders all five compliance badges', () => {
     render(<Home />)
     expect(screen.getByText('NIST AI RMF')).toBeInTheDocument()
@@ -94,5 +99,38 @@ describe('Home — Schema Quick-Start', () => {
     render(<Home />)
     const links = screen.getAllByRole('link', { name: /download schema/i })
     expect(links.length).toBeGreaterThan(0)
+  })
+})
+
+describe('Home — anchors', () => {
+  it.each(['spec', 'why', 'planes', 'schema', 'ecosystem', 'cite'])('has a #%s section', (id) => {
+    const { container } = render(<Home />)
+    expect(container.querySelector(`#${id}`)).not.toBeNull()
+  })
+})
+
+describe('Home — Ecosystem', () => {
+  it('links the SDK on PyPI and the sidecar on GHCR', () => {
+    const { container } = render(<Home />)
+    const eco = within(container.querySelector('#ecosystem'))
+    expect(eco.getByRole('link', { name: /opengpl-sdk/ })).toHaveAttribute('href', 'https://pypi.org/project/opengpl-sdk/')
+    expect(eco.getByRole('link', { name: /sidecar/i })).toHaveAttribute('href', 'https://github.com/sadayamuthu/opengpl/pkgs/container/opengpl%2Fsidecar')
+    expect(eco.getByText('pip install opengpl-sdk')).toBeInTheDocument()
+  })
+})
+
+describe('Home — Cite', () => {
+  it('shows the Zenodo DOI', () => {
+    const { container } = render(<Home />)
+    expect(within(container.querySelector('#cite')).getByRole('link', { name: 'https://doi.org/10.5281/zenodo.23844061' })).toBeInTheDocument()
+  })
+})
+
+describe('Home — Planes flow', () => {
+  it('draws the request flow from prompt to response', () => {
+    const { container } = render(<Home />)
+    const planes = within(container.querySelector('#planes'))
+    expect(planes.getByText('prompt')).toBeInTheDocument()
+    expect(planes.getByText('response')).toBeInTheDocument()
   })
 })

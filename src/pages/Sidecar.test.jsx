@@ -34,3 +34,11 @@ test('renders GitHub CTA with correct href', () => {
   expect(links.length).toBeGreaterThan(0)
   expect(links[0]).toHaveAttribute('href', expect.stringContaining('github.com/sadayamuthu/opengpl'))
 })
+
+describe('Sidecar — published image', () => {
+  it('runs the image that is actually published on GHCR', () => {
+    const { container } = renderSidecar()
+    expect(container.textContent).toContain('ghcr.io/sadayamuthu/opengpl/sidecar:latest')
+    expect(container.textContent).not.toContain('opengpl-sidecar:latest')
+  })
+})

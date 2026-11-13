@@ -1,36 +1,37 @@
 import { Link, NavLink } from 'react-router-dom'
 
+const LINKS = [
+  { to: '/spec', label: 'Spec' },
+  { to: '/schema', label: 'Schema' },
+  { to: '/sdk', label: 'SDK' },
+  { to: '/sidecar', label: 'Sidecar' },
+]
+
+const linkClass = ({ isActive }) =>
+  `text-sm pb-0.5 border-b transition-colors ${isActive ? 'text-ink border-acc' : 'text-ink-muted border-transparent hover:text-ink'}`
+
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 bg-surface border-b border-subtle">
-      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" aria-label="OpenGPL home" className="flex items-center gap-2 text-text-primary font-semibold text-lg">
-          <span className="text-accent-cyan" aria-hidden="true">📜</span>
-          <span>OpenGPL</span>
-        </Link>
-        <div className="flex items-center gap-8">
-          <NavLink to="/spec" className="text-sm text-text-muted hover:text-text-primary transition-colors duration-200">
-            Spec
-          </NavLink>
-          <NavLink to="/schema" className="text-sm text-text-muted hover:text-text-primary transition-colors duration-200">
-            Schema
-          </NavLink>
-          <NavLink to="/sdk" className="text-sm text-text-muted hover:text-text-primary transition-colors duration-200">
-            SDK
-          </NavLink>
-          <NavLink to="/sidecar" className="text-sm text-text-muted hover:text-text-primary transition-colors duration-200">
-            Sidecar
-          </NavLink>
-          <a
-            href="https://github.com/sadayamuthu/opengpl"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-text-muted hover:text-text-primary transition-colors duration-200"
-          >
+    <header className="bg-paper/95 backdrop-blur sticky top-0 z-50">
+      <nav className="max-w-page mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-b-2 border-ink">
+        <div className="flex flex-wrap items-baseline gap-x-3">
+          <Link to="/" aria-label="OpenGPL home" className="font-serif text-xl tracking-tight">
+            Open<span className="text-acc">GPL</span>
+          </Link>
+          <a href="https://openastra.org" target="_blank" rel="noopener noreferrer" className="text-xs text-ink-muted hover:text-ink">
+            An OpenAstra framework ↗
+          </a>
+        </div>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
+          {LINKS.map((l) => (
+            <NavLink key={l.to} to={l.to} className={linkClass}>{l.label}</NavLink>
+          ))}
+          <Link to={{ pathname: '/', hash: '#cite' }} className="text-sm text-ink-muted hover:text-ink">Cite</Link>
+          <a href="https://github.com/sadayamuthu/opengpl" target="_blank" rel="noopener noreferrer" className="text-sm text-ink-muted hover:text-ink">
             GitHub ↗
           </a>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   )
 }

@@ -1,3 +1,6 @@
+import { CodeBlock } from '../components/ui'
+import { Code, DocPage, DocSection, LinkButton } from '../components/DocPage'
+
 const SCHEMA_URL = 'https://opengpl.org/schema/v0.1/schema.json'
 
 const fields = [
@@ -11,91 +14,67 @@ const fields = [
 
 export default function Schema() {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-24 flex flex-col gap-20">
-
-      {/* Header */}
-      <section className="flex flex-col gap-6 max-w-3xl">
-        <h1 className="text-4xl sm:text-5xl font-bold text-accent-cyan">OpenGPL JSON Schema</h1>
-        <p className="text-text-muted text-lg leading-relaxed">
-          This schema validates <code className="text-accent-cyan">.gpl</code> policy files
-          and enables IDE autocompletion, inline documentation, and syntax checking — without any build step.
+    <DocPage
+      eyebrow="Schema · v0.1"
+      title="OpenGPL JSON Schema"
+      lede={<>
+        <p>
+          This schema validates <Code>.gpl</Code> policy files and enables IDE autocompletion,
+          inline documentation, and syntax checking, without any build step.
         </p>
-        <p className="text-text-muted text-base leading-relaxed">
+        <p className="text-base">
           Versioned alongside the specification and compatible with any JSON Schema-aware editor.
           The schema URL is shown in the IDE integration section below.
         </p>
-      </section>
-
-      {/* IDE Integration */}
-      <section className="flex flex-col gap-6">
-        <h2 className="text-2xl font-semibold text-text-primary">IDE integration</h2>
-        <p className="text-text-muted text-sm leading-relaxed">
-          Add to VS Code <code className="text-accent-cyan">.vscode/settings.json</code> for instant validation
-          and autocomplete on all <code className="text-accent-cyan">.gpl</code> files:
-        </p>
-        <div className="max-w-2xl bg-surface border border-subtle rounded-xl p-6 font-mono text-sm flex flex-col gap-1">
-          <p className="text-text-muted"># .vscode/settings.json</p>
-          <p className="text-accent-cyan mt-2">{'{'}</p>
-          <p className="text-accent-cyan pl-4">{'"yaml.schemas": {'}</p>
-          <p className="text-accent-cyan pl-8">
-            <span>{'"'}</span>
-            <span>{SCHEMA_URL}</span>
-            <span>{'": "*.gpl"'}</span>
-          </p>
-          <p className="text-accent-cyan pl-4">{'}'}</p>
-          <p className="text-accent-cyan">{'}'}</p>
+      </>}
+    >
+      <DocSection
+        title="IDE integration"
+        lede={<>Add to VS Code <Code>.vscode/settings.json</Code> for instant validation and autocomplete on all <Code>.gpl</Code> files:</>}
+      >
+        <div className="max-w-3xl">
+          <CodeBlock title="# .vscode/settings.json">{`{
+  "yaml.schemas": {
+    "${SCHEMA_URL}": "*.gpl"
+  }
+}`}</CodeBlock>
         </div>
-        <p className="text-text-muted text-xs">
+        <p className="text-xs text-ink-muted mt-3">
           Requires the{' '}
-          <a
-            href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent-cyan hover:underline"
-          >
+          <a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml" target="_blank" rel="noopener noreferrer" className="text-acc underline underline-offset-2">
             YAML extension by Red Hat
           </a>{' '}
           for VS Code.
         </p>
-      </section>
+      </DocSection>
 
-      {/* Schema Structure */}
-      <section className="flex flex-col gap-6">
-        <h2 className="text-2xl font-semibold text-text-primary">Schema structure</h2>
-        <p className="text-text-muted text-sm leading-relaxed">
-          Each policy block in a <code className="text-accent-cyan">.gpl</code> file maps to the following schema fields:
-        </p>
-        <div className="flex flex-col gap-3">
-          {fields.map((f) => (
-            <div key={f.field} className="bg-surface border border-subtle rounded-xl p-5 grid grid-cols-1 sm:grid-cols-[140px_100px_1fr] gap-3 items-start">
-              <code className="text-accent-cyan text-sm font-mono">{f.field}</code>
-              <span className="text-text-muted text-xs font-mono">{f.type}</span>
-              <p className="text-text-muted text-sm leading-relaxed">{f.desc}</p>
-            </div>
-          ))}
+      <DocSection title="Schema structure" lede={<>Each policy block in a <Code>.gpl</Code> file maps to the following schema fields:</>}>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm min-w-[32rem]">
+            <thead>
+              <tr className="border-b-2 border-ink text-left">
+                <th className="pb-2 pr-6 text-[11px] tracking-[0.12em] uppercase text-ink-muted font-medium">Field</th>
+                <th className="pb-2 pr-6 text-[11px] tracking-[0.12em] uppercase text-ink-muted font-medium">Type</th>
+                <th className="pb-2 text-[11px] tracking-[0.12em] uppercase text-ink-muted font-medium">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {fields.map((f) => (
+                <tr key={f.field} className="border-b border-rule align-top">
+                  <td className="py-3 pr-6 font-mono text-acc">{f.field}</td>
+                  <td className="py-3 pr-6 font-mono text-xs text-ink-muted whitespace-nowrap">{f.type}</td>
+                  <td className="py-3 text-ink-muted leading-relaxed">{f.desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </section>
+      </DocSection>
 
-      {/* CTAs */}
-      <section className="flex flex-col sm:flex-row gap-4">
-        <a
-          href={SCHEMA_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-6 py-3 rounded-lg bg-accent-blue text-space font-semibold text-sm hover:opacity-90 transition-opacity glow-blue text-center"
-        >
-          Download Schema
-        </a>
-        <a
-          href="https://github.com/sadayamuthu/opengpl"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-6 py-3 rounded-lg border border-subtle text-text-primary text-sm hover:border-accent-cyan transition-colors duration-200 text-center"
-        >
-          View on GitHub ↗
-        </a>
-      </section>
-
-    </div>
+      <div className="py-10 border-t border-rule flex flex-wrap gap-3">
+        <LinkButton href={SCHEMA_URL} solid>Download Schema</LinkButton>
+        <LinkButton href="https://github.com/sadayamuthu/opengpl">View on GitHub ↗</LinkButton>
+      </div>
+    </DocPage>
   )
 }

@@ -1,13 +1,16 @@
+import { CodeBlock } from '../components/ui'
+import { DocPage, DocSection, LinkButton } from '../components/DocPage'
+
 const gates = [
   {
     icon: '🛡️',
     name: 'Input Gate',
-    desc: 'Intercepts all prompts before they reach the model. Detects prompt injection, jailbreak attempts, and PII in user input. Supports semantic filters  not just keyword matching so policies apply to intent, not just surface text.',
+    desc: 'Intercepts all prompts before they reach the model. Detects prompt injection, jailbreak attempts, and PII in user input. Supports semantic filters, not just keyword matching, so policies apply to intent, not just surface text.',
   },
   {
     icon: '🤖',
     name: 'Model Gate',
-    desc: 'Controls which models an agent can invoke, at what trust level, and with which tools. Hallucination thresholds, max token limits, and tool use permissions are first class policy primitives not config files.',
+    desc: 'Controls which models an agent can invoke, at what trust level, and with which tools. Hallucination thresholds, max token limits, and tool use permissions are first-class policy primitives, not config files.',
   },
   {
     icon: '📤',
@@ -37,104 +40,84 @@ const policyFields = [
   { field: 'when', desc: 'Optional boolean condition. Supports dot-notation on agent, input, output context.' },
 ]
 
+const SYNTAX = `# Deny PII in generated output
+policy "restrict-pii-output" {
+  agent:    *                        # applies to all agents
+  action:   generate
+  resource: user_data
+  effect:   deny
+  when:     output.contains_pii == true
+}
+
+# Restrict tool access by trust level
+policy "tool-access-control" {
+  agent:    customer-support-bot
+  action:   invoke_tool
+  resource: payment_api
+  effect:   deny
+  when:     agent.trust_level < 3
+}`
+
 export default function Spec() {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-24 flex flex-col gap-20">
-
-      {/* Header */}
-      <section className="flex flex-col gap-6 max-w-3xl">
-        <h1 className="text-4xl sm:text-5xl font-bold text-accent-cyan">The OpenGPL Specification</h1>
-        <p className="text-text-muted text-lg leading-relaxed">
+    <DocPage
+      eyebrow="Specification · v0.1"
+      title="The OpenGPL Specification"
+      lede={<>
+        <p>
           OpenGPL (Open Governance Policy Language) is an open, declarative policy language purpose-built for AI systems.
           It defines how AI agents behave, what resources they can access, what they can produce,
-          and how they demonstrate compliance — in a single, auditable policy file.
+          and how they demonstrate compliance, in a single, auditable policy file.
         </p>
-        <p className="text-text-muted text-base leading-relaxed">
+        <p className="text-base">
           Existing policy engines like OPA/Rego and AWS Cedar were designed for deterministic systems.
           Generative AI introduces probabilistic outputs, semantic reasoning requirements, and novel
-          threat vectors — prompt injection, hallucination, and jailbreaks — that older frameworks
+          threat vectors (prompt injection, hallucination, and jailbreaks) that older frameworks
           were never built to handle. OpenGPL treats these as first-class primitives.
         </p>
-      </section>
-
-      {/* Four Control Gates */}
-      <section className="flex flex-col gap-8">
-        <h2 className="text-2xl font-semibold text-text-primary">One policy file. Four control gates.</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {gates.map((gate) => (
-            <div key={gate.name} className="bg-surface border border-subtle rounded-xl p-6 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl" aria-hidden="true">{gate.icon}</span>
-                <h3 className="text-text-primary font-semibold text-base">{gate.name}</h3>
-              </div>
-              <p className="text-text-muted text-sm leading-relaxed">{gate.desc}</p>
+      </>}
+    >
+      <DocSection title="One policy file. Four control gates.">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {gates.map((gate, i) => (
+            <div key={gate.name} className="bg-card border border-rule rounded-sm p-5">
+              <p className="font-mono text-xs text-acc">{String(i + 1).padStart(2, '0')}</p>
+              <h3 className="font-serif text-2xl mt-1">{gate.name}</h3>
+              <p className="text-sm text-ink-muted mt-2 leading-relaxed">{gate.desc}</p>
             </div>
           ))}
         </div>
-      </section>
+      </DocSection>
 
-      {/* Policy Syntax */}
-      <section className="flex flex-col gap-8">
-        <h2 className="text-2xl font-semibold text-text-primary">Policy syntax</h2>
-        <p className="text-text-muted text-sm leading-relaxed max-w-2xl">
-          A policy is a named block that declares the agent scope, action, resource, effect, and an optional condition.
-          Multiple policies in one file are evaluated in order; the first matching policy wins.
-        </p>
-        <div className="bg-surface border border-subtle rounded-xl p-6 font-mono text-sm flex flex-col gap-1">
-          <p className="text-text-muted"># Deny PII in generated output</p>
-          <p className="text-accent-cyan mt-2">{'policy "restrict-pii-output" {'}</p>
-          <p className="text-accent-cyan pl-4">{'agent:    *                        # applies to all agents'}</p>
-          <p className="text-accent-cyan pl-4">{'action:   generate'}</p>
-          <p className="text-accent-cyan pl-4">{'resource: user_data'}</p>
-          <p className="text-accent-cyan pl-4">{'effect:   deny'}</p>
-          <p className="text-accent-cyan pl-4">{'when:     output.contains_pii == true'}</p>
-          <p className="text-accent-cyan">{'}'}</p>
-          <p className="text-text-muted mt-4"># Restrict tool access by trust level</p>
-          <p className="text-accent-cyan mt-2">{'policy "tool-access-control" {'}</p>
-          <p className="text-accent-cyan pl-4">{'agent:    customer-support-bot'}</p>
-          <p className="text-accent-cyan pl-4">{'action:   invoke_tool'}</p>
-          <p className="text-accent-cyan pl-4">{'resource: payment_api'}</p>
-          <p className="text-accent-cyan pl-4">{'effect:   deny'}</p>
-          <p className="text-accent-cyan pl-4">{'when:     agent.trust_level < 3'}</p>
-          <p className="text-accent-cyan">{'}'}</p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <DocSection
+        title="Policy syntax"
+        lede="A policy is a named block that declares the agent scope, action, resource, effect, and an optional condition. Multiple policies in one file are evaluated in order; the first matching policy wins."
+      >
+        <CodeBlock>{SYNTAX}</CodeBlock>
+        <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 mt-6">
           {policyFields.map((f) => (
-            <div key={f.field} className="bg-surface border border-subtle rounded-xl p-4 flex flex-col gap-1">
-              <code className="text-accent-cyan text-sm font-mono">{f.field}</code>
-              <p className="text-text-muted text-xs leading-relaxed">{f.desc}</p>
+            <div key={f.field} className="py-3 border-b border-rule">
+              <dt><code className="font-mono text-acc">{f.field}</code></dt>
+              <dd className="text-sm text-ink-muted mt-1 leading-relaxed">{f.desc}</dd>
             </div>
           ))}
-        </div>
-      </section>
+        </dl>
+      </DocSection>
 
-      {/* Compliance Mapping */}
-      <section className="flex flex-col gap-8">
-        <h2 className="text-2xl font-semibold text-text-primary">Compliance framework mapping</h2>
-        <div className="flex flex-col gap-3">
+      <DocSection title="Compliance framework mapping">
+        <ul>
           {complianceFrameworks.map((fw) => (
-            <div key={fw.name} className="bg-surface border border-subtle rounded-xl p-5 flex flex-col sm:flex-row gap-4">
-              <span className="px-3 py-1 rounded-full border border-subtle text-text-muted text-xs tracking-widest shrink-0 self-start">
-                {fw.name}
-              </span>
-              <p className="text-text-muted text-sm leading-relaxed">{fw.coverage}</p>
-            </div>
+            <li key={fw.name} className="grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-6 gap-y-2 py-4 border-b border-rule">
+              <span className="self-start px-3 py-1 rounded-full border border-ink/25 text-xs tracking-widest uppercase justify-self-start">{fw.name}</span>
+              <p className="text-sm text-ink-muted leading-relaxed">{fw.coverage}</p>
+            </li>
           ))}
-        </div>
-      </section>
+        </ul>
+      </DocSection>
 
-      {/* CTA */}
-      <section className="flex gap-4 flex-wrap">
-        <a
-          href="https://github.com/sadayamuthu/opengpl"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-6 py-3 rounded-lg bg-accent-blue text-space font-semibold text-sm hover:opacity-90 transition-opacity glow-blue"
-        >
-          View on GitHub ↗
-        </a>
-      </section>
-
-    </div>
+      <div className="py-10 border-t border-rule flex flex-wrap gap-3">
+        <LinkButton href="https://github.com/sadayamuthu/opengpl" solid>View on GitHub ↗</LinkButton>
+      </div>
+    </DocPage>
   )
 }

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Home from './Home'
 
@@ -88,3 +88,23 @@ describe('Home — Compliance', () => {
   })
 })
 
+
+describe('Home — research-lab additions', () => {
+  it('adds ISO 42001 to the compliance badges', () => {
+    renderHome()
+    expect(screen.getByText('ISO 42001')).toBeInTheDocument()
+  })
+
+  it('indexes the four docs pages', () => {
+    const { container } = renderHome()
+    const docs = within(container.querySelector('#docs'))
+    ;[['Spec', '/spec'], ['Schema', '/schema'], ['SDK', '/sdk'], ['Sidecar', '/sidecar']].forEach(([name, to]) =>
+      expect(docs.getByRole('link', { name: new RegExp(`^${name}`) })).toHaveAttribute('href', to)
+    )
+  })
+
+  it('offers the Zenodo citation', () => {
+    const { container } = renderHome()
+    expect(within(container.querySelector('#cite')).getByRole('link', { name: 'https://doi.org/10.5281/zenodo.23844061' })).toBeInTheDocument()
+  })
+})

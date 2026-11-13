@@ -1,3 +1,6 @@
+import { CodeBlock } from '../components/ui'
+import { Code, DocPage, DocSection, LinkButton } from '../components/DocPage'
+
 const cliCommands = [
   {
     command: 'opengpl validate <policy.gpl>',
@@ -13,32 +16,7 @@ const cliCommands = [
   },
 ]
 
-export default function Sdk() {
-  return (
-    <div className="max-w-5xl mx-auto px-6 py-24 flex flex-col gap-20">
-
-      {/* Header */}
-      <section className="flex flex-col gap-6 max-w-3xl">
-        <h1 className="text-4xl sm:text-5xl font-bold text-accent-cyan">OpenGPL Python SDK</h1>
-        <p className="text-text-muted text-lg leading-relaxed">
-          The official Python SDK for loading, evaluating, and auditing OpenGPL policies programmatically.
-          Embed policy enforcement directly in your AI application or CI pipeline.
-        </p>
-      </section>
-
-      {/* Installation */}
-      <section className="flex flex-col gap-6">
-        <h2 className="text-2xl font-semibold text-text-primary">Installation</h2>
-        <div className="max-w-lg bg-surface border border-subtle rounded-xl p-5 font-mono text-sm">
-          <p className="text-text-muted text-xs mb-2"># requires Python 3.9+</p>
-          <p className="text-accent-cyan">pip install opengpl-sdk</p>
-        </div>
-      </section>
-
-      {/* Quickstart */}
-      <section className="flex flex-col gap-6">
-        <h2 className="text-2xl font-semibold text-text-primary">Quickstart</h2>
-        <pre className="bg-surface border border-subtle rounded-xl p-6 font-mono text-sm text-text-muted overflow-x-auto whitespace-pre-wrap">{`from opengpl import PolicyEngine
+const QUICKSTART = `from opengpl import PolicyEngine
 
 # Load a policy file
 engine = PolicyEngine("policy.gpl")
@@ -54,45 +32,43 @@ result = engine.check_input(
 # result.effect → "deny"
 
 if not result.passed:
-    raise PolicyViolation(result.reasons)`}</pre>
-      </section>
+    raise PolicyViolation(result.reasons)`
 
-      {/* CLI Reference */}
-      <section className="flex flex-col gap-6">
-        <h2 className="text-2xl font-semibold text-text-primary">CLI reference</h2>
-        <p className="text-text-muted text-sm leading-relaxed">
-          The SDK ships with the <code className="text-accent-cyan">opengpl</code> CLI for local development and CI integration.
-        </p>
-        <div className="flex flex-col gap-4">
-          {cliCommands.map((cmd) => (
-            <div key={cmd.command} className="bg-surface border border-subtle rounded-xl p-5 flex flex-col gap-3">
-              <code className="text-accent-cyan text-sm font-mono">{cmd.command}</code>
-              <p className="text-text-muted text-sm leading-relaxed">{cmd.desc}</p>
-            </div>
-          ))}
+export default function Sdk() {
+  return (
+    <DocPage
+      eyebrow="SDK · Python"
+      title="OpenGPL Python SDK"
+      lede={<p>
+        The official Python SDK for loading, evaluating, and auditing OpenGPL policies programmatically.
+        Embed policy enforcement directly in your AI application or CI pipeline.
+      </p>}
+    >
+      <DocSection title="Installation">
+        <div className="max-w-xl">
+          <CodeBlock title="# requires Python 3.9+">pip install opengpl-sdk</CodeBlock>
         </div>
-      </section>
+      </DocSection>
 
-      {/* CTAs */}
-      <section className="flex flex-col sm:flex-row gap-4">
-        <a
-          href="https://pypi.org/project/opengpl-sdk"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-6 py-3 rounded-lg bg-accent-blue text-space font-semibold text-sm hover:opacity-90 transition-opacity glow-blue text-center"
-        >
-          View on PyPI ↗
-        </a>
-        <a
-          href="https://github.com/sadayamuthu/opengpl"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-6 py-3 rounded-lg border border-subtle text-text-primary text-sm hover:border-accent-cyan transition-colors duration-200 text-center"
-        >
-          View on GitHub ↗
-        </a>
-      </section>
+      <DocSection title="Quickstart">
+        <div className="max-w-3xl"><CodeBlock>{QUICKSTART}</CodeBlock></div>
+      </DocSection>
 
-    </div>
+      <DocSection title="CLI reference" lede={<>The SDK ships with the <Code>opengpl</Code> CLI for local development and CI integration.</>}>
+        <ul>
+          {cliCommands.map((cmd) => (
+            <li key={cmd.command} className="py-4 border-b border-rule">
+              <code className="font-mono text-sm text-acc break-words">{cmd.command}</code>
+              <p className="text-sm text-ink-muted mt-1 leading-relaxed max-w-3xl">{cmd.desc}</p>
+            </li>
+          ))}
+        </ul>
+      </DocSection>
+
+      <div className="py-10 border-t border-rule flex flex-wrap gap-3">
+        <LinkButton href="https://pypi.org/project/opengpl-sdk" solid>View on PyPI ↗</LinkButton>
+        <LinkButton href="https://github.com/sadayamuthu/opengpl">View on GitHub ↗</LinkButton>
+      </div>
+    </DocPage>
   )
 }

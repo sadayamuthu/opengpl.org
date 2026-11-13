@@ -2,40 +2,21 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-subtle bg-surface mt-auto">
-      <div className="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-text-muted text-sm">
-          © {new Date().getFullYear()} · OpenGPL is CC BY 4.0 · by{' '}
-          <a
-            href="https://openastra.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-accent-cyan transition-colors duration-200"
-          >
+    <footer className="mt-auto">
+      <div className="max-w-page mx-auto px-4 sm:px-6 py-8 border-t-2 border-ink flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm text-ink-muted">
+        <p>
+          © {new Date().getFullYear()} · OpenGPL is CC BY 4.0 · An{' '}
+          <a href="https://openastra.org" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">
             OpenAstra
-          </a>
+          </a>{' '}
+          framework · II. Security Controls
         </p>
-        <div className="flex items-center gap-6 text-sm">
-          <Link to="/spec" className="text-text-muted hover:text-accent-cyan transition-colors duration-200">
-            Spec
-          </Link>
-          <Link to="/schema" className="text-text-muted hover:text-accent-cyan transition-colors duration-200">
-            Schema
-          </Link>
-          <Link to="/sdk" className="text-text-muted hover:text-accent-cyan transition-colors duration-200">
-            SDK
-          </Link>
-          <Link to="/sidecar" className="text-text-muted hover:text-accent-cyan transition-colors duration-200">
-            Sidecar
-          </Link>
-          <a
-            href="https://github.com/sadayamuthu/opengpl"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-text-muted hover:text-accent-cyan transition-colors duration-200"
-          >
-            GitHub ↗
-          </a>
+        <div className="flex flex-wrap gap-x-5 gap-y-1">
+          <Link to="/spec" className="hover:text-ink">Spec</Link>
+          <Link to="/schema" className="hover:text-ink">Schema</Link>
+          <Link to="/sdk" className="hover:text-ink">SDK</Link>
+          <Link to="/sidecar" className="hover:text-ink">Sidecar</Link>
+          <a href="https://github.com/sadayamuthu/opengpl" target="_blank" rel="noopener noreferrer" className="hover:text-ink">GitHub ↗</a>
         </div>
       </div>
     </footer>

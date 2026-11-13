@@ -11,9 +11,24 @@ function renderWithRouter() {
 }
 
 describe('Navbar', () => {
-  it('renders the OpenGPL logo', () => {
+  it('renders the OpenGPL logo linking home', () => {
     renderWithRouter()
-    expect(screen.getByText('OpenGPL')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'OpenGPL home' })).toHaveAttribute('href', '#/')
+  })
+
+  it('links back to the OpenAstra family site', () => {
+    renderWithRouter()
+    expect(screen.getByRole('link', { name: /An OpenAstra framework/ })).toHaveAttribute('href', 'https://openastra.org')
+  })
+
+  it('has a Cite link to the citation on the home page', () => {
+    renderWithRouter()
+    expect(screen.getByRole('link', { name: 'Cite' })).toHaveAttribute('href', '#/#cite')
+  })
+
+  it('wraps on narrow screens', () => {
+    renderWithRouter()
+    expect(screen.getByRole('navigation').querySelector('.flex-wrap')).not.toBeNull()
   })
 
   it('renders Spec nav link', () => {

@@ -9,7 +9,7 @@ export default function Footer() {
           <a href="https://openastra.org" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">
             OpenAstra
           </a>{' '}
-          framework · II. Security Controls
+          framework · VI. Governance &amp; Compliance
         </p>
         <div className="flex flex-wrap gap-x-5 gap-y-1">
           <Link to="/spec" className="hover:text-ink">Spec</Link>

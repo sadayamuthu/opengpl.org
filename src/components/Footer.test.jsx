@@ -12,6 +12,12 @@ describe('Footer', () => {
     expect(screen.getByText(/OpenAstra/i)).toBeInTheDocument()
   })
 
+  it('names its OpenAstra category, VI. Governance & Compliance', () => {
+    const { container } = renderWithRouter(<Footer />)
+    expect(container.textContent).toMatch(/VI\. Governance & Compliance/)
+    expect(container.textContent).not.toMatch(/Security Controls/)
+  })
+
   it('renders CC BY 4.0 license notice', () => {
     renderWithRouter(<Footer />)
     expect(screen.getByText(/CC BY 4\.0/i)).toBeInTheDocument()

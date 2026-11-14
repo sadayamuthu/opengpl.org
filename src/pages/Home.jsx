@@ -65,7 +65,7 @@ export default function Home() {
       {/* Hero */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-14 sm:py-20 items-start">
         <div>
-          <Eyebrow>II · Security Controls · v0.1 · Public Draft</Eyebrow>
+          <Eyebrow>VI · Governance &amp; Compliance · v0.1 · Public Draft</Eyebrow>
           <h1 className="font-serif text-4xl sm:text-6xl leading-[1.05] tracking-tight mt-4">
             The policy language for <em className="text-acc">AI systems.</em>
           </h1>
